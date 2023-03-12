@@ -14,6 +14,9 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log(req.body);
+  if(req.body.pic == '') {
+    req.body.pic = '/images/2.jfif';
+  }
   db.Place.create(req.body)
   .then(() => {
       res.redirect('/places')
@@ -49,11 +52,47 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', (req, res) => {
   db.Place.findById(req.params.id)
-  .then(place => {
+  .populate('comments')
+    .then(place => {
+      console.log(place.comments)
       res.render('places/show', { place })
   })
   .catch(err => {
       console.log('err', err)
+      res.render('error404')
+  })
+})
+
+router.get('/:id/comment', (req, res) => {
+  console.log(req.body);
+  db.Place.findById(req.params.id)
+    .then(place => {
+      res.render('places/newcomment', { place });
+    })
+})
+
+router.post('/:id/comment', (req, res) => {
+  console.log("!!!!!!!!!!!!!!")
+  console.log(req.body)
+  db.Place.findById(req.params.id)
+    .then(place => {
+      console.log("Place to add comment:")
+      console.log(place)
+      db.Comment.create(req.body)
+        .then(comment => {
+          console.log("New comment:")
+          console.log(comment)
+          place.comments.push(comment.id)
+          place.save()
+          .then(() => {
+              res.redirect(`/places/${req.params.id}`)
+          })
+      })
+      .catch(err => {
+          res.render('error404')
+      })
+  })
+  .catch(err => {
       res.render('error404')
   })
 })

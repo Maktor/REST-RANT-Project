@@ -18,9 +18,8 @@ function edit_form ({place, id}) {
                     </div>
                     <div className="form-group col-sm-6">
                         <label htmlFor="pic">Place City</label>
-                        <input type="text"
+                        <input id="city" type="text"
                             name="city"
-                            id="city"
                             required
                             defaultValue={place.city} />
                     </div>
@@ -28,17 +27,15 @@ function edit_form ({place, id}) {
                 <div className="row">
                     <div className="form-group col-sm-6">
                         <label htmlFor="pic">Place State</label>
-                        <input type="text"
+                        <input id="state" type="text"
                             name="state"
-                            id="state"
                             required
                             defaultValue={place.state} />
                     </div>
                     <div className="form-group col-sm-6">
                         <label htmlFor="pic">Place Picture</label>
-                        <input type="text"
+                        <input id="pic" type="text"
                             name="pic"
-                            id="pic"
                             required
                             defaultValue={place.pic} />
                     </div>
@@ -46,9 +43,8 @@ function edit_form ({place, id}) {
                 <div className="row">
                     <div className="form-group col-sm-6">
                         <label htmlFor="pic">Place Cuisines</label>
-                        <input type="text"
+                        <input id="cuisines" type="text"
                             name="cuisines"
-                            id="cuisines"
                             required
                             defaultValue={place.cuisines} />
                     </div>
