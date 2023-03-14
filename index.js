@@ -2,12 +2,12 @@
 require('dotenv').config()
 const express = require('express')
 const methodOverride = require('method-override')
-// const mongoose = require('mongoose')
+const mongoose = require('mongoose')
 
-// mongoose.connect(process.env.MONGO_URI, {
-//   useNewUrlParser: true, 
-//   useUnifiedTopology: true
-// })
+mongoose.connect(process.env.MONGO_URI, {
+   useNewUrlParser: true, 
+   useUnifiedTopology: true
+ })
 
 const app = express()
 

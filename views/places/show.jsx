@@ -8,6 +8,24 @@ function show ({place}) {
     </h3>
   )
 
+  let rating = (
+    <h3 className="inactive">
+      Not yet rated
+    </h3>
+  )
+
+  if (data.place.comments.length) {
+    let sumRatings = data.place.comments.reduce((tot, c) => {
+      return tot + c.stars
+    }, 0)
+    let averageRating = sumRatings / data.place.comments.length
+    rating = (
+      <h3>
+        {averageRating} stars
+      </h3>
+    )
+  }
+
   if (place.comments.length) {
     comments = place.comments.map(c => {
       return (
@@ -35,6 +53,7 @@ function show ({place}) {
             </div>
             <div className="col-sm-6">
               <h2>Rating</h2>
+              {rating}
               <h3>
                 Not Rated
               </h3>
